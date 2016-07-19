@@ -480,21 +480,21 @@ angular_multi_select_data_converter.factory('angularMultiSelectDataConverter', [
 		if ((typeof obj === 'undefined' ? 'undefined' : _typeof(obj)) !== 'object' || Array.isArray(obj)) {
 			//do nothing
 		} else {
-				if (keys.length === 0) {
-					var obj_vals = vals(obj);
-					for (j = 0; j < obj_vals.length; j++) {
-						ret.push(obj_vals[j]);
+			if (keys.length === 0) {
+				var obj_vals = vals(obj);
+				for (j = 0; j < obj_vals.length; j++) {
+					ret.push(obj_vals[j]);
+				}
+			} else {
+				for (j = 0; j < keys.length; j++) {
+					if (!(keys[j] in obj)) {
+						continue;
 					}
-				} else {
-					for (j = 0; j < keys.length; j++) {
-						if (!(keys[j] in obj)) {
-							continue;
-						}
 
-						ret.push(obj[keys[j]]);
-					}
+					ret.push(obj[keys[j]]);
 				}
 			}
+		}
 
 		if (this.DEBUG === true) console.timeEnd(this.NAME + ' -> to_array');
 
@@ -584,16 +584,16 @@ angular_multi_select_data_converter.factory('angularMultiSelectDataConverter', [
 		if ((typeof data === 'undefined' ? 'undefined' : _typeof(data)) !== 'object' || !Array.isArray(data) || keys.length === 0) {
 			//do nothing
 		} else {
-				for (var i = 0; i < data.length; i++) {
-					for (var j = 0; j < keys.length; j++) {
-						if (!(keys[j] in data[i])) {
-							continue;
-						}
-
-						ret.push(data[i][keys[j]]);
+			for (var i = 0; i < data.length; i++) {
+				for (var j = 0; j < keys.length; j++) {
+					if (!(keys[j] in data[i])) {
+						continue;
 					}
+
+					ret.push(data[i][keys[j]]);
 				}
 			}
+		}
 
 		if (this.DEBUG === true) console.timeEnd(this.NAME + ' -> to_values');
 

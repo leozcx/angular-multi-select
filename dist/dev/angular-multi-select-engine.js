@@ -716,52 +716,52 @@ angular_multi_select_engine.factory('angularMultiSelectEngine', ['angularMultiSe
     *        before and after the operation.
     */
 		} else {
-				this.collection.chain().find({
-					'$and': [_defineProperty({}, angularMultiSelectConstants.INTERNAL_KEY_PARENTS_ID, {
-						'$contains': item[this.ID_PROPERTY]
-					}), _defineProperty({}, angularMultiSelectConstants.INTERNAL_KEY_LEVEL, {
-						'$gte': item[angularMultiSelectConstants.INTERNAL_KEY_LEVEL] + 1
-					}), _defineProperty({}, this.CHECKED_PROPERTY, {
-						'$in': [angularMultiSelectConstants.INTERNAL_DATA_NODE_MIXED, angularMultiSelectConstants.INTERNAL_DATA_NODE_UNCHECKED, angularMultiSelectConstants.INTERNAL_DATA_LEAF_UNCHECKED]
-					})]
-				}).simplesort(angularMultiSelectConstants.INTERNAL_KEY_ORDER, false).update(function (obj) {
-					if (obj[angularMultiSelectConstants.INTERNAL_KEY_CHILDREN_LEAFS] === 0) {
-						_this5.stats[angularMultiSelectConstants.INTERNAL_STATS_CHECKED_LEAFS]++;
+			this.collection.chain().find({
+				'$and': [_defineProperty({}, angularMultiSelectConstants.INTERNAL_KEY_PARENTS_ID, {
+					'$contains': item[this.ID_PROPERTY]
+				}), _defineProperty({}, angularMultiSelectConstants.INTERNAL_KEY_LEVEL, {
+					'$gte': item[angularMultiSelectConstants.INTERNAL_KEY_LEVEL] + 1
+				}), _defineProperty({}, this.CHECKED_PROPERTY, {
+					'$in': [angularMultiSelectConstants.INTERNAL_DATA_NODE_MIXED, angularMultiSelectConstants.INTERNAL_DATA_NODE_UNCHECKED, angularMultiSelectConstants.INTERNAL_DATA_LEAF_UNCHECKED]
+				})]
+			}).simplesort(angularMultiSelectConstants.INTERNAL_KEY_ORDER, false).update(function (obj) {
+				if (obj[angularMultiSelectConstants.INTERNAL_KEY_CHILDREN_LEAFS] === 0) {
+					_this5.stats[angularMultiSelectConstants.INTERNAL_STATS_CHECKED_LEAFS]++;
 
-						obj[_this5.CHECKED_PROPERTY] = angularMultiSelectConstants.INTERNAL_DATA_LEAF_CHECKED;
-					} else {
-						_this5.stats[angularMultiSelectConstants.INTERNAL_STATS_CHECKED_NODES]++;
-						if (obj[_this5.CHECKED_PROPERTY] === angularMultiSelectConstants.INTERNAL_DATA_NODE_UNCHECKED) {
-							_this5.stats[angularMultiSelectConstants.INTERNAL_STATS_UNCHECKED_NODES]--;
-						}
-
-						obj[_this5.CHECKED_PROPERTY] = angularMultiSelectConstants.INTERNAL_DATA_NODE_CHECKED;
-						obj[angularMultiSelectConstants.INTERNAL_KEY_CHECKED_CHILDREN] = obj[angularMultiSelectConstants.INTERNAL_KEY_CHILDREN_LEAFS];
-					}
-
-					obj[angularMultiSelectConstants.INTERNAL_KEY_CHECKED_MODIFICATION] = time.getTime();
-				});
-
-				this.collection.chain().find(_defineProperty({}, this.ID_PROPERTY, {
-					'$in': item[angularMultiSelectConstants.INTERNAL_KEY_PARENTS_ID]
-				})).simplesort(angularMultiSelectConstants.INTERNAL_KEY_ORDER, true).update(function (obj) {
+					obj[_this5.CHECKED_PROPERTY] = angularMultiSelectConstants.INTERNAL_DATA_LEAF_CHECKED;
+				} else {
+					_this5.stats[angularMultiSelectConstants.INTERNAL_STATS_CHECKED_NODES]++;
 					if (obj[_this5.CHECKED_PROPERTY] === angularMultiSelectConstants.INTERNAL_DATA_NODE_UNCHECKED) {
 						_this5.stats[angularMultiSelectConstants.INTERNAL_STATS_UNCHECKED_NODES]--;
 					}
-					if (obj[angularMultiSelectConstants.INTERNAL_KEY_CHECKED_CHILDREN] + diff_checked_children === obj[angularMultiSelectConstants.INTERNAL_KEY_CHILDREN_LEAFS]) {
-						_this5.stats[angularMultiSelectConstants.INTERNAL_STATS_CHECKED_NODES]++;
-					}
 
-					obj[angularMultiSelectConstants.INTERNAL_KEY_CHECKED_CHILDREN] += diff_checked_children;
-					if (obj[angularMultiSelectConstants.INTERNAL_KEY_CHECKED_CHILDREN] === obj[angularMultiSelectConstants.INTERNAL_KEY_CHILDREN_LEAFS]) {
-						obj[_this5.CHECKED_PROPERTY] = angularMultiSelectConstants.INTERNAL_DATA_NODE_CHECKED;
-					} else {
-						obj[_this5.CHECKED_PROPERTY] = angularMultiSelectConstants.INTERNAL_DATA_NODE_MIXED;
-					}
+					obj[_this5.CHECKED_PROPERTY] = angularMultiSelectConstants.INTERNAL_DATA_NODE_CHECKED;
+					obj[angularMultiSelectConstants.INTERNAL_KEY_CHECKED_CHILDREN] = obj[angularMultiSelectConstants.INTERNAL_KEY_CHILDREN_LEAFS];
+				}
 
-					obj[angularMultiSelectConstants.INTERNAL_KEY_CHECKED_MODIFICATION] = time.getTime();
-				});
-			}
+				obj[angularMultiSelectConstants.INTERNAL_KEY_CHECKED_MODIFICATION] = time.getTime();
+			});
+
+			this.collection.chain().find(_defineProperty({}, this.ID_PROPERTY, {
+				'$in': item[angularMultiSelectConstants.INTERNAL_KEY_PARENTS_ID]
+			})).simplesort(angularMultiSelectConstants.INTERNAL_KEY_ORDER, true).update(function (obj) {
+				if (obj[_this5.CHECKED_PROPERTY] === angularMultiSelectConstants.INTERNAL_DATA_NODE_UNCHECKED) {
+					_this5.stats[angularMultiSelectConstants.INTERNAL_STATS_UNCHECKED_NODES]--;
+				}
+				if (obj[angularMultiSelectConstants.INTERNAL_KEY_CHECKED_CHILDREN] + diff_checked_children === obj[angularMultiSelectConstants.INTERNAL_KEY_CHILDREN_LEAFS]) {
+					_this5.stats[angularMultiSelectConstants.INTERNAL_STATS_CHECKED_NODES]++;
+				}
+
+				obj[angularMultiSelectConstants.INTERNAL_KEY_CHECKED_CHILDREN] += diff_checked_children;
+				if (obj[angularMultiSelectConstants.INTERNAL_KEY_CHECKED_CHILDREN] === obj[angularMultiSelectConstants.INTERNAL_KEY_CHILDREN_LEAFS]) {
+					obj[_this5.CHECKED_PROPERTY] = angularMultiSelectConstants.INTERNAL_DATA_NODE_CHECKED;
+				} else {
+					obj[_this5.CHECKED_PROPERTY] = angularMultiSelectConstants.INTERNAL_DATA_NODE_MIXED;
+				}
+
+				obj[angularMultiSelectConstants.INTERNAL_KEY_CHECKED_MODIFICATION] = time.getTime();
+			});
+		}
 
 		if (this.DEBUG === true) console.timeEnd(this.NAME + " -> check_node");
 
@@ -856,52 +856,52 @@ angular_multi_select_engine.factory('angularMultiSelectEngine', ['angularMultiSe
     *        before and after the operation.
     */
 		} else {
-				this.collection.chain().find({
-					'$and': [_defineProperty({}, angularMultiSelectConstants.INTERNAL_KEY_PARENTS_ID, {
-						'$contains': item[this.ID_PROPERTY]
-					}), _defineProperty({}, angularMultiSelectConstants.INTERNAL_KEY_LEVEL, {
-						'$gte': item[angularMultiSelectConstants.INTERNAL_KEY_LEVEL] + 1
-					}), _defineProperty({}, this.CHECKED_PROPERTY, {
-						'$in': [angularMultiSelectConstants.INTERNAL_DATA_NODE_MIXED, angularMultiSelectConstants.INTERNAL_DATA_NODE_CHECKED, angularMultiSelectConstants.INTERNAL_DATA_LEAF_CHECKED]
-					})]
-				}).simplesort(angularMultiSelectConstants.INTERNAL_KEY_ORDER, false).update(function (obj) {
-					if (obj[angularMultiSelectConstants.INTERNAL_KEY_CHILDREN_LEAFS] === 0) {
-						_this6.stats[angularMultiSelectConstants.INTERNAL_STATS_CHECKED_LEAFS]--;
+			this.collection.chain().find({
+				'$and': [_defineProperty({}, angularMultiSelectConstants.INTERNAL_KEY_PARENTS_ID, {
+					'$contains': item[this.ID_PROPERTY]
+				}), _defineProperty({}, angularMultiSelectConstants.INTERNAL_KEY_LEVEL, {
+					'$gte': item[angularMultiSelectConstants.INTERNAL_KEY_LEVEL] + 1
+				}), _defineProperty({}, this.CHECKED_PROPERTY, {
+					'$in': [angularMultiSelectConstants.INTERNAL_DATA_NODE_MIXED, angularMultiSelectConstants.INTERNAL_DATA_NODE_CHECKED, angularMultiSelectConstants.INTERNAL_DATA_LEAF_CHECKED]
+				})]
+			}).simplesort(angularMultiSelectConstants.INTERNAL_KEY_ORDER, false).update(function (obj) {
+				if (obj[angularMultiSelectConstants.INTERNAL_KEY_CHILDREN_LEAFS] === 0) {
+					_this6.stats[angularMultiSelectConstants.INTERNAL_STATS_CHECKED_LEAFS]--;
 
-						obj[_this6.CHECKED_PROPERTY] = angularMultiSelectConstants.INTERNAL_DATA_LEAF_UNCHECKED;
-					} else {
-						_this6.stats[angularMultiSelectConstants.INTERNAL_STATS_UNCHECKED_NODES]++;
-						if (obj[_this6.CHECKED_PROPERTY] === angularMultiSelectConstants.INTERNAL_DATA_NODE_CHECKED) {
-							_this6.stats[angularMultiSelectConstants.INTERNAL_STATS_CHECKED_NODES]--;
-						}
-
-						obj[_this6.CHECKED_PROPERTY] = angularMultiSelectConstants.INTERNAL_DATA_NODE_UNCHECKED;
-						obj[angularMultiSelectConstants.INTERNAL_KEY_CHECKED_CHILDREN] = 0;
-					}
-
-					obj[angularMultiSelectConstants.INTERNAL_KEY_CHECKED_MODIFICATION] = time.getTime();
-				});
-
-				this.collection.chain().find(_defineProperty({}, this.ID_PROPERTY, {
-					'$in': item[angularMultiSelectConstants.INTERNAL_KEY_PARENTS_ID]
-				})).simplesort(angularMultiSelectConstants.INTERNAL_KEY_ORDER, true).update(function (obj) {
+					obj[_this6.CHECKED_PROPERTY] = angularMultiSelectConstants.INTERNAL_DATA_LEAF_UNCHECKED;
+				} else {
+					_this6.stats[angularMultiSelectConstants.INTERNAL_STATS_UNCHECKED_NODES]++;
 					if (obj[_this6.CHECKED_PROPERTY] === angularMultiSelectConstants.INTERNAL_DATA_NODE_CHECKED) {
 						_this6.stats[angularMultiSelectConstants.INTERNAL_STATS_CHECKED_NODES]--;
 					}
-					if (obj[angularMultiSelectConstants.INTERNAL_KEY_CHECKED_CHILDREN] - diff_checked_children === 0) {
-						_this6.stats[angularMultiSelectConstants.INTERNAL_STATS_UNCHECKED_NODES]++;
-					}
 
-					obj[angularMultiSelectConstants.INTERNAL_KEY_CHECKED_CHILDREN] -= diff_checked_children;
-					if (obj[angularMultiSelectConstants.INTERNAL_KEY_CHECKED_CHILDREN] === 0) {
-						obj[_this6.CHECKED_PROPERTY] = angularMultiSelectConstants.INTERNAL_DATA_NODE_UNCHECKED;
-					} else {
-						obj[_this6.CHECKED_PROPERTY] = angularMultiSelectConstants.INTERNAL_DATA_NODE_MIXED;
-					}
+					obj[_this6.CHECKED_PROPERTY] = angularMultiSelectConstants.INTERNAL_DATA_NODE_UNCHECKED;
+					obj[angularMultiSelectConstants.INTERNAL_KEY_CHECKED_CHILDREN] = 0;
+				}
 
-					obj[angularMultiSelectConstants.INTERNAL_KEY_CHECKED_MODIFICATION] = time.getTime();
-				});
-			}
+				obj[angularMultiSelectConstants.INTERNAL_KEY_CHECKED_MODIFICATION] = time.getTime();
+			});
+
+			this.collection.chain().find(_defineProperty({}, this.ID_PROPERTY, {
+				'$in': item[angularMultiSelectConstants.INTERNAL_KEY_PARENTS_ID]
+			})).simplesort(angularMultiSelectConstants.INTERNAL_KEY_ORDER, true).update(function (obj) {
+				if (obj[_this6.CHECKED_PROPERTY] === angularMultiSelectConstants.INTERNAL_DATA_NODE_CHECKED) {
+					_this6.stats[angularMultiSelectConstants.INTERNAL_STATS_CHECKED_NODES]--;
+				}
+				if (obj[angularMultiSelectConstants.INTERNAL_KEY_CHECKED_CHILDREN] - diff_checked_children === 0) {
+					_this6.stats[angularMultiSelectConstants.INTERNAL_STATS_UNCHECKED_NODES]++;
+				}
+
+				obj[angularMultiSelectConstants.INTERNAL_KEY_CHECKED_CHILDREN] -= diff_checked_children;
+				if (obj[angularMultiSelectConstants.INTERNAL_KEY_CHECKED_CHILDREN] === 0) {
+					obj[_this6.CHECKED_PROPERTY] = angularMultiSelectConstants.INTERNAL_DATA_NODE_UNCHECKED;
+				} else {
+					obj[_this6.CHECKED_PROPERTY] = angularMultiSelectConstants.INTERNAL_DATA_NODE_MIXED;
+				}
+
+				obj[angularMultiSelectConstants.INTERNAL_KEY_CHECKED_MODIFICATION] = time.getTime();
+			});
+		}
 
 		if (this.DEBUG === true) console.timeEnd(this.NAME + " -> uncheck_node");
 

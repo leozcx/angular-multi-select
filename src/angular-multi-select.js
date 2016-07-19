@@ -24,7 +24,8 @@ angular_multi_select.directive('angularMultiSelect', [
 
 			scope: {
 				inputModel: '=',
-				outputModel: '=?'
+				outputModel: '=?',
+                                preselect2: '@'
 			},
 
 			link: function ($scope, element, attrs) {
@@ -435,6 +436,10 @@ angular_multi_select.directive('angularMultiSelect', [
 					});
 				};
 
+                                $scope.$watch('preselect2', function(_new, _old) {
+				    self.preselect = amsu.array_from_attr(_new);
+				    amsu.parse_pairs(self.preselect);
+                                });
 				$scope.$watch('inputModel', function (_new, _old) {
 					self.react_to_data_changes = false;
 					/*
