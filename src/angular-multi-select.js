@@ -437,6 +437,8 @@ angular_multi_select.directive('angularMultiSelect', [
 				};
 
                                 $scope.$watch('preselect2', function(_new, _old) {
+                                    if(!_new)
+                                        return;
 				    self.preselect = amsu.array_from_attr(_new);
 				    amsu.parse_pairs(self.preselect);
                                 });
