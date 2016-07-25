@@ -253,230 +253,255 @@ angular_multi_select.directive('angularMultiSelect', [
 				$scope.reset       = function () {
 					self.init($scope.reset_model);
 				};
+                                $scope.check_all = function() {
+                                    var query = $scope.search;
+                                    if(query === '')
+                                        amse.check_all();
+                                    else {
+                                        var filter = {
+                                            'name': {
+                                                '$contains': query
+                                            }
+                                        };
+                                        amse.check_filtered(filter);
+                                    }
+                                };
+                                $scope.uncheck_all = function() {
+                                    var query = $scope.search;
+                                    if(query === '')
+                                        amse.uncheck_all();
+                                    else {
+                                        var filter = {
+                                            'name': {
+                                                '$contains': query
+                                            }
+                                        };
+                                        amse.uncheck_filtered(filter);
+                                    }
+                                };
+                                /*
+                                   ███████ ███████  █████  ██████   ██████ ██   ██
+                                   ██      ██      ██   ██ ██   ██ ██      ██   ██
+                                   ███████ █████   ███████ ██████  ██      ███████
+                                   ██ ██      ██   ██ ██   ██ ██      ██   ██
+                                   ███████ ███████ ██   ██ ██   ██  ██████ ██   ██
+                                   */
+                                $scope.search = "";
+                                self.search_promise = null;
+                                $scope.search_spinner_visible = false;
+                                $scope.$watch('search', function (_new, _old) {
+                                    if (_new === _old && _new === "") {
+                                        return;
+                                    }
 
-				/*
-				███████ ███████  █████  ██████   ██████ ██   ██
-				██      ██      ██   ██ ██   ██ ██      ██   ██
-				███████ █████   ███████ ██████  ██      ███████
-				     ██ ██      ██   ██ ██   ██ ██      ██   ██
-				███████ ███████ ██   ██ ██   ██  ██████ ██   ██
-				*/
-				$scope.search = "";
-				self.search_promise = null;
-				$scope.search_spinner_visible = false;
-				$scope.$watch('search', function (_new, _old) {
-					if (_new === _old && _new === "") {
-						return;
-					}
+                                    if($scope.search_field === null) {
+                                        return;
+                                    }
 
-					if($scope.search_field === null) {
-						return;
-					}
+                                    /*
+                                     * This means that there was a search, but it was deleted
+                                     * and now the normal tree should be repainted.
+                                     */
+                                    if (_new === "") {
+                                        if (self.search_promise !== null) {
+                                            $timeout.cancel(self.search_promise);
+                                        }
+                                        $scope.items = amse.get_visible_tree();
+                                        $scope.search_spinner_visible = false;
 
-					/*
-					 * This means that there was a search, but it was deleted
-					 * and now the normal tree should be repainted.
-					 */
-					if (_new === "") {
-						if (self.search_promise !== null) {
-							$timeout.cancel(self.search_promise);
-						}
-						$scope.items = amse.get_visible_tree();
-						$scope.search_spinner_visible = false;
+                                        $timeout(function () {
+                                            amssh.transform_position(element);
+                                        });
+                                        return;
+                                    }
 
-						$timeout(function () {
-							amssh.transform_position(element);
-						});
-						return;
-					}
+                                    /*
+                                     * If the code execution gets here, it means that there is
+                                     * a search that should be performed
+                                     */
+                                    if (self.search_promise !== null) {
+                                        $timeout.cancel(self.search_promise);
+                                    }
 
-					/*
-					 * If the code execution gets here, it means that there is
-					 * a search that should be performed
-					 */
-					if (self.search_promise !== null) {
-						$timeout.cancel(self.search_promise);
-					}
+                                    $scope.search_spinner_visible = true;
+                                    var _search_fn = function (query) {
+                                        self.search_promise = $timeout(function () {
+                                            //TODO: this needs a lot of improving. Maybe use lunar.js?
+                                            var filter = [];
+                                            filter.push({
+                                                field: $scope.search_field,
+                                                query: query
+                                            });
 
-					$scope.search_spinner_visible = true;
-					var _search_fn = function (query) {
-						self.search_promise = $timeout(function () {
-							//TODO: this needs a lot of improving. Maybe use lunar.js?
-							var filter = [];
-							filter.push({
-								field: $scope.search_field,
-								query: query
-							});
+                                            $scope.items = amse.get_filtered_tree(filter);
+                                            $scope.search_spinner_visible = false;
 
-							$scope.items = amse.get_filtered_tree(filter);
-							$scope.search_spinner_visible = false;
+                                            $timeout(function () {
+                                                amssh.transform_position(element);
+                                            });
+                                        }, 1500, true);
+                                    };
+                                    _search_fn(_new); // Hack for Angular <1.4 support
+                                });
 
-							$timeout(function () {
-								amssh.transform_position(element);
-							});
-						}, 1500, true);
-					};
-					_search_fn(_new); // Hack for Angular <1.4 support
-				});
+                                /*
+                                   ██████  ███    ██     ██████   █████  ████████  █████       ██████ ██   ██  █████  ███    ██  ██████  ███████
+                                   ██    ██ ████   ██     ██   ██ ██   ██    ██    ██   ██     ██      ██   ██ ██   ██ ████   ██ ██       ██
+                                   ██    ██ ██ ██  ██     ██   ██ ███████    ██    ███████     ██      ███████ ███████ ██ ██  ██ ██   ███ █████
+                                   ██    ██ ██  ██ ██     ██   ██ ██   ██    ██    ██   ██     ██      ██   ██ ██   ██ ██  ██ ██ ██    ██ ██
+                                   ██████  ██   ████     ██████  ██   ██    ██    ██   ██      ██████ ██   ██ ██   ██ ██   ████  ██████  ███████
+                                   */
+                                amse.on_data_change_fn = function () {
+                                    if (self.react_to_data_changes === false) {
+                                        return;
+                                    }
 
-				/*
-				 ██████  ███    ██     ██████   █████  ████████  █████       ██████ ██   ██  █████  ███    ██  ██████  ███████
-				██    ██ ████   ██     ██   ██ ██   ██    ██    ██   ██     ██      ██   ██ ██   ██ ████   ██ ██       ██
-				██    ██ ██ ██  ██     ██   ██ ███████    ██    ███████     ██      ███████ ███████ ██ ██  ██ ██   ███ █████
-				██    ██ ██  ██ ██     ██   ██ ██   ██    ██    ██   ██     ██      ██   ██ ██   ██ ██  ██ ██ ██    ██ ██
-				 ██████  ██   ████     ██████  ██   ██    ██    ██   ██      ██████ ██   ██ ██   ██ ██   ████  ██████  ███████
-				*/
-				amse.on_data_change_fn = function () {
-					if (self.react_to_data_changes === false) {
-						return;
-					}
+                                    /*
+                                     * Will be triggered every time the internal model data is changed.
+                                     * That could happen on check/uncheck, for example.
+                                     */
 
-					/*
-					 * Will be triggered every time the internal model data is changed.
-					 * That could happen on check/uncheck, for example.
-					 */
+                                    $scope.stats = amse.get_stats();
+                                    /*
+                                     * Get the visible tree only once. Consecutive calls on un/check
+                                     * will automatically propagate to the rendered tree.
+                                     */
+                                    if (!$scope.search) {
+                                        $scope.items = amse.get_visible_tree();
+                                    }
 
-					$scope.stats = amse.get_stats();
-					/*
-					 * Get the visible tree only once. Consecutive calls on un/check
-					 * will automatically propagate to the rendered tree.
-					 */
-					if (!$scope.search) {
-						$scope.items = amse.get_visible_tree();
-					}
+                                    var checked_tree = amse.get_checked_tree(self.output_filter);
 
-					var checked_tree = amse.get_checked_tree(self.output_filter);
+                                    /*
+                                     * Remove internal (undeeded) data.
+                                     */
+                                    var res = amsdc.to_external(checked_tree);
 
-					/*
-					 * Remove internal (undeeded) data.
-					 */
-					var res = amsdc.to_external(checked_tree);
+                                    /*
+                                     * This is used to create the dropdown label.
+                                     */
+                                    if (typeof(attrs.dropdownLabel) === "string" && attrs.dropdownLabel.indexOf("outputModelIterator" > -1)) {
+                                        $scope.outputModelNotFormatted = JSON.parse(JSON.stringify(res));
+                                    }
 
-					/*
-					 * This is used to create the dropdown label.
-					 */
-					if (typeof(attrs.dropdownLabel) === "string" && attrs.dropdownLabel.indexOf("outputModelIterator" > -1)) {
-						$scope.outputModelNotFormatted = JSON.parse(JSON.stringify(res));
-					}
+                                    /*
+                                     * Convert the data to the desired output.
+                                     */
+                                    res = amsdc.to_format(res, self.output_type, self.output_keys);
 
-					/*
-					 * Convert the data to the desired output.
-					 */
-					res = amsdc.to_format(res, self.output_type, self.output_keys);
+                                    /*
+                                     * Don't do anything else if the output model hasn't changed.
+                                     */
+                                    if (angular.equals($scope.outputModel, res)) {
+                                        return;
+                                    }
 
-					/*
-					 * Don't do anything else if the output model hasn't changed.
-					 */
-					if (angular.equals($scope.outputModel, res)) {
-						return;
-					}
+                                    $scope.outputModel = res;
+                                    $timeout(function () {
+                                        $rootScope.$broadcast('ams_output_model_change', {
+                                            name: $scope.ops.NAME
+                                        });
+                                    });
+                                };
 
-					$scope.outputModel = res;
-					$timeout(function () {
-						$rootScope.$broadcast('ams_output_model_change', {
-							name: $scope.ops.NAME
-						});
-					});
-				};
+                                /*
+                                   ██████  ███    ██     ██    ██ ██ ███████ ██    ██  █████  ██           ██████ ██   ██  █████  ███    ██  ██████  ███████
+                                   ██    ██ ████   ██     ██    ██ ██ ██      ██    ██ ██   ██ ██          ██      ██   ██ ██   ██ ████   ██ ██       ██
+                                   ██    ██ ██ ██  ██     ██    ██ ██ ███████ ██    ██ ███████ ██          ██      ███████ ███████ ██ ██  ██ ██   ███ █████
+                                   ██    ██ ██  ██ ██      ██  ██  ██      ██ ██    ██ ██   ██ ██          ██      ██   ██ ██   ██ ██  ██ ██ ██    ██ ██
+                                   ██████  ██   ████       ████   ██ ███████  ██████  ██   ██ ███████      ██████ ██   ██ ██   ██ ██   ████  ██████  ███████
+                                   */
+                                amse.on_visual_change_fn = function () {
+                                    /*
+                                     * Will be triggered when a change that requires a visual change happende.
+                                     * This is normaly on open/close actions.
+                                     */
+                                    $scope.items = amse.get_visible_tree();
 
-				/*
-				 ██████  ███    ██     ██    ██ ██ ███████ ██    ██  █████  ██           ██████ ██   ██  █████  ███    ██  ██████  ███████
-				██    ██ ████   ██     ██    ██ ██ ██      ██    ██ ██   ██ ██          ██      ██   ██ ██   ██ ████   ██ ██       ██
-				██    ██ ██ ██  ██     ██    ██ ██ ███████ ██    ██ ███████ ██          ██      ███████ ███████ ██ ██  ██ ██   ███ █████
-				██    ██ ██  ██ ██      ██  ██  ██      ██ ██    ██ ██   ██ ██          ██      ██   ██ ██   ██ ██  ██ ██ ██    ██ ██
-				 ██████  ██   ████       ████   ██ ███████  ██████  ██   ██ ███████      ██████ ██   ██ ██   ██ ██   ████  ██████  ███████
-				*/
-				amse.on_visual_change_fn = function () {
-					/*
-					 * Will be triggered when a change that requires a visual change happende.
-					 * This is normaly on open/close actions.
-					 */
-					$scope.items = amse.get_visible_tree();
+                                    /*
+                                     * This is required to avoid weird gaps appearing between the items
+                                     * container and the button if the amount of shown items changes.
+                                     */
+                                    $timeout(function () {
+                                        amssh.transform_position(element);
+                                    });
+                                };
 
-					/*
-					 * This is required to avoid weird gaps appearing between the items
-					 * container and the button if the amount of shown items changes.
-					 */
-					$timeout(function () {
-						amssh.transform_position(element);
-					});
-				};
+                                /*
+                                   ███    ███  █████  ██ ███    ██
+                                   ████  ████ ██   ██ ██ ████   ██
+                                   ██ ████ ██ ███████ ██ ██ ██  ██
+                                   ██  ██  ██ ██   ██ ██ ██  ██ ██
+                                   ██      ██ ██   ██ ██ ██   ████
+                                   */
+                                self.prepare_data = function (data) {
+                                    if (!Array.isArray(data)) {
+                                        return [];
+                                    }
 
-				/*
-				███    ███  █████  ██ ███    ██
-				████  ████ ██   ██ ██ ████   ██
-				██ ████ ██ ███████ ██ ██ ██  ██
-				██  ██  ██ ██   ██ ██ ██  ██ ██
-				██      ██ ██   ██ ██ ██   ████
-				*/
-				self.prepare_data = function (data) {
-					if (!Array.isArray(data)) {
-						return [];
-					}
+                                    var checked_data  = self.do_not_check_data   ? data         : amsdc.check_prerequisites(data);
+                                    var internal_data = self.do_not_convert_data ? checked_data : amsdc.to_internal(checked_data);
 
-					var checked_data  = self.do_not_check_data   ? data         : amsdc.check_prerequisites(data);
-					var internal_data = self.do_not_convert_data ? checked_data : amsdc.to_internal(checked_data);
+                                    return internal_data;
+                                };
 
-					return internal_data;
-				};
+                                self.init = function (data) {
+                                    $scope.reset_model = JSON.parse(JSON.stringify(data));
 
-				self.init = function (data) {
-					$scope.reset_model = JSON.parse(JSON.stringify(data));
+                                    amse.insert(data);
 
-					amse.insert(data);
+                                    for (var i = 0; i < self.preselect.length; i += 2) {
+                                        amse.check_node_by([self.preselect[i], self.preselect[i + 1]]);
+                                    }
 
-					for (var i = 0; i < self.preselect.length; i += 2) {
-						amse.check_node_by([self.preselect[i], self.preselect[i + 1]]);
-					}
-
-					$timeout(function () {
-						$rootScope.$broadcast('ams_input_model_change', {
-							name: $scope.ops.NAME
-						});
-					});
-				};
+                                    $timeout(function () {
+                                        $rootScope.$broadcast('ams_input_model_change', {
+                                            name: $scope.ops.NAME
+                                        });
+                                    });
+                                };
 
                                 $scope.$watch('preselect2', function(_new, _old) {
                                     if(!_new)
                                         return;
-				    self.preselect = amsu.array_from_attr(_new);
-				    amsu.parse_pairs(self.preselect);
+                                    self.preselect = amsu.array_from_attr(_new);
+                                    amsu.parse_pairs(self.preselect);
                                 });
-				$scope.$watch('inputModel', function (_new, _old) {
-					self.react_to_data_changes = false;
-					/*
-					* The entry point of the directive. This monitors the input data and
-					* decides when to populate the internal data model and how to do it.
-					*/
-					var data;
-					if (typeof(_new) === "string") {
-						try {
-							data = self.prepare_data(JSON.parse(_new));
-							self.init(data);
-							self.react_to_data_changes = true;
-							amse.on_data_change();
-						} catch (e) {
-							$http.get(_new).then(function (response) {
-								data = self.prepare_data(response.data);
-								self.init(data);
-								self.react_to_data_changes = true;
-								amse.on_data_change();
-							});
-						}
-					} else {
-						data = self.prepare_data(_new);
-						self.init(data);
-						self.react_to_data_changes = true;
-						amse.on_data_change();
-					}
-				});
+                                $scope.$watch('inputModel', function (_new, _old) {
+                                    self.react_to_data_changes = false;
+                                    /*
+                                     * The entry point of the directive. This monitors the input data and
+                                     * decides when to populate the internal data model and how to do it.
+                                     */
+                                    var data;
+                                    if (typeof(_new) === "string") {
+                                        try {
+                                            data = self.prepare_data(JSON.parse(_new));
+                                            self.init(data);
+                                            self.react_to_data_changes = true;
+                                            amse.on_data_change();
+                                        } catch (e) {
+                                            $http.get(_new).then(function (response) {
+                                                data = self.prepare_data(response.data);
+                                                self.init(data);
+                                                self.react_to_data_changes = true;
+                                                amse.on_data_change();
+                                            });
+                                        }
+                                    } else {
+                                        data = self.prepare_data(_new);
+                                        self.init(data);
+                                        self.react_to_data_changes = true;
+                                        amse.on_data_change();
+                                    }
+                                });
 
-				$scope.$on('$destroy', function () {
-					amse.remove_collection($scope.ops.NAME);
-					document.removeEventListener('click', $scope.onclick_listener);
-					document.removeEventListener('keydown', $scope.onkeypress_listener);
-				});
-			}
-		};
-	}
+                                $scope.$on('$destroy', function () {
+                                    amse.remove_collection($scope.ops.NAME);
+                                    document.removeEventListener('click', $scope.onclick_listener);
+                                    document.removeEventListener('keydown', $scope.onkeypress_listener);
+                                });
+                        }
+                };
+        }
 ]);

@@ -14,8 +14,8 @@ angular_multi_select.run(['$templateCache', function($templateCache) {
 
 			<div class="ams-helpers">
 				<div class="selects">
-					<button class="all ams-btn" type="button" accesskey="a" ng-click="amse.check_all()" ng-hide="hide_helpers.indexOf('check_all') > -1">{{ 'CHECK_ALL' | translate }}</button>
-					<button class="none ams-btn" type="button" accesskey="n" ng-click="amse.uncheck_all()" ng-hide="hide_helpers.indexOf('check_none') > -1">{{ 'CHECK_NONE' | translate }}</button>
+					<button class="all ams-btn" type="button" accesskey="a" ng-click="check_all()" ng-hide="hide_helpers.indexOf('check_all') > -1">{{ 'CHECK_ALL' | translate }}</button>
+					<button class="none ams-btn" type="button" accesskey="n" ng-click="uncheck_all()" ng-hide="hide_helpers.indexOf('check_none') > -1">{{ 'CHECK_NONE' | translate }}</button>
 				</div>
 
 				<div class="resets">
