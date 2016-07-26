@@ -6,7 +6,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _templateObject = _taggedTemplateLiteral(["\n\n\t\t<div class=\"ams-button\" ng-click=\"open = !open\">\n\t\t\t<div class=\"ams-button-text\" ng-bind-html=\"amssh.create_dropdown_label(stats, outputModelNotFormatted, self.output_type)\"></div>\n\t\t\t<div class=\"ams-caret\"></div>\n\t\t</div>\n\n\t\t<div class=\"ams-container ng-cloak\" ng-show=\"open\">\n\n\t\t\t<div class=\"ams-helpers\">\n\t\t\t\t<div class=\"selects\">\n\t\t\t\t\t<button class=\"all ams-btn\" type=\"button\" accesskey=\"a\" ng-click=\"amse.check_all()\" ng-hide=\"hide_helpers.indexOf('check_all') > -1\">{{ 'CHECK_ALL' | translate }}</button>\n\t\t\t\t\t<button class=\"none ams-btn\" type=\"button\" accesskey=\"n\" ng-click=\"amse.uncheck_all()\" ng-hide=\"hide_helpers.indexOf('check_none') > -1\">{{ 'CHECK_NONE' | translate }}</button>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"resets\">\n\t\t\t\t\t<button class=\"reset ams-btn\" type=\"button\" accesskey=\"r\" ng-click=\"reset()\" ng-hide=\"hide_helpers.indexOf('reset') > -1\">{{ 'RESET' | translate }}</button>\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t\t<div class=\"ams-search\" ng-show=\"search_field !== null\">\n\t\t\t\t<input class=\"ams-search-field\" type=\"text\" name=\"ams-search-field\" value=\"\" placeholder=\"{{ 'SEARCH' | translate }}\" ng-model=\"search\" autofocus>\n\t\t\t\t<div class=\"ams-spinner\" ng-show=\"search_spinner_visible\"></div>\n\t\t\t\t<button class=\"clear ams-btn\" type=\"button\" accesskey=\"c\" name=\"clear\" title=\"{{ 'CLEAR' | translate }}\" ng-click=\"search = ''\"></button>\n\t\t\t</div>\n\n\t\t\t<div class=\"ams-items\">\n\t\t\t\t<div\n\t\t\t\t\tng-repeat=\"item in items track by item[ops.ID_PROPERTY]\"\n\t\t\t\t\tclass=\"ams-item {{ amssh.get_level_class(item) }} {{ amssh.get_type_class(item) }} {{ amssh.get_open_class(item) }} {{ $index === focused_index ? 'ams-item-focused' : '' }}\"\n\t\t\t\t>\n\t\t\t\t\t<!-- Caret -->\n\t\t\t\t\t<div\n\t\t\t\t\t\tclass=\"ams-caret {{ amssh.get_open_class(item) }}\"\n\t\t\t\t\t\tng-click=\"toggle_open_node(item)\"\n\t\t\t\t\t></div>\n\n\t\t\t\t\t<!-- Text of the element -->\n\t\t\t\t\t<div class=\"ams-item-text\" ng-bind-html=\"amssh.create_label(item)\"></div>\n\n\t\t\t\t\t<!-- Check holder -->\n\t\t\t\t\t<div\n\t\t\t\t\t\tclass=\"check {{ amssh.get_checked_class(item) }}\"\n\t\t\t\t\t\tng-click=\"toggle_check_node(item)\"\n\t\t\t\t\t>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t</div>\n\n\t"], ["\n\n\t\t<div class=\"ams-button\" ng-click=\"open = !open\">\n\t\t\t<div class=\"ams-button-text\" ng-bind-html=\"amssh.create_dropdown_label(stats, outputModelNotFormatted, self.output_type)\"></div>\n\t\t\t<div class=\"ams-caret\"></div>\n\t\t</div>\n\n\t\t<div class=\"ams-container ng-cloak\" ng-show=\"open\">\n\n\t\t\t<div class=\"ams-helpers\">\n\t\t\t\t<div class=\"selects\">\n\t\t\t\t\t<button class=\"all ams-btn\" type=\"button\" accesskey=\"a\" ng-click=\"amse.check_all()\" ng-hide=\"hide_helpers.indexOf('check_all') > -1\">{{ 'CHECK_ALL' | translate }}</button>\n\t\t\t\t\t<button class=\"none ams-btn\" type=\"button\" accesskey=\"n\" ng-click=\"amse.uncheck_all()\" ng-hide=\"hide_helpers.indexOf('check_none') > -1\">{{ 'CHECK_NONE' | translate }}</button>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"resets\">\n\t\t\t\t\t<button class=\"reset ams-btn\" type=\"button\" accesskey=\"r\" ng-click=\"reset()\" ng-hide=\"hide_helpers.indexOf('reset') > -1\">{{ 'RESET' | translate }}</button>\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t\t<div class=\"ams-search\" ng-show=\"search_field !== null\">\n\t\t\t\t<input class=\"ams-search-field\" type=\"text\" name=\"ams-search-field\" value=\"\" placeholder=\"{{ 'SEARCH' | translate }}\" ng-model=\"search\" autofocus>\n\t\t\t\t<div class=\"ams-spinner\" ng-show=\"search_spinner_visible\"></div>\n\t\t\t\t<button class=\"clear ams-btn\" type=\"button\" accesskey=\"c\" name=\"clear\" title=\"{{ 'CLEAR' | translate }}\" ng-click=\"search = ''\"></button>\n\t\t\t</div>\n\n\t\t\t<div class=\"ams-items\">\n\t\t\t\t<div\n\t\t\t\t\tng-repeat=\"item in items track by item[ops.ID_PROPERTY]\"\n\t\t\t\t\tclass=\"ams-item {{ amssh.get_level_class(item) }} {{ amssh.get_type_class(item) }} {{ amssh.get_open_class(item) }} {{ $index === focused_index ? 'ams-item-focused' : '' }}\"\n\t\t\t\t>\n\t\t\t\t\t<!-- Caret -->\n\t\t\t\t\t<div\n\t\t\t\t\t\tclass=\"ams-caret {{ amssh.get_open_class(item) }}\"\n\t\t\t\t\t\tng-click=\"toggle_open_node(item)\"\n\t\t\t\t\t></div>\n\n\t\t\t\t\t<!-- Text of the element -->\n\t\t\t\t\t<div class=\"ams-item-text\" ng-bind-html=\"amssh.create_label(item)\"></div>\n\n\t\t\t\t\t<!-- Check holder -->\n\t\t\t\t\t<div\n\t\t\t\t\t\tclass=\"check {{ amssh.get_checked_class(item) }}\"\n\t\t\t\t\t\tng-click=\"toggle_check_node(item)\"\n\t\t\t\t\t>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t</div>\n\n\t"]);
+var _templateObject = _taggedTemplateLiteral(["\n\n\t\t<div class=\"ams-button\" ng-click=\"open = !open\">\n\t\t\t<div class=\"ams-button-text\" ng-bind-html=\"amssh.create_dropdown_label(stats, outputModelNotFormatted, self.output_type)\"></div>\n\t\t\t<div class=\"ams-caret\"></div>\n\t\t</div>\n\n\t\t<div class=\"ams-container ng-cloak\" ng-show=\"open\">\n\n\t\t\t<div class=\"ams-helpers\">\n\t\t\t\t<div class=\"selects\">\n\t\t\t\t\t<button class=\"all ams-btn\" type=\"button\" accesskey=\"a\" ng-click=\"check_all()\" ng-hide=\"hide_helpers.indexOf('check_all') > -1\">{{ 'CHECK_ALL' | translate }}</button>\n\t\t\t\t\t<button class=\"none ams-btn\" type=\"button\" accesskey=\"n\" ng-click=\"uncheck_all()\" ng-hide=\"hide_helpers.indexOf('check_none') > -1\">{{ 'CHECK_NONE' | translate }}</button>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"resets\">\n\t\t\t\t\t<button class=\"reset ams-btn\" type=\"button\" accesskey=\"r\" ng-click=\"reset()\" ng-hide=\"hide_helpers.indexOf('reset') > -1\">{{ 'RESET' | translate }}</button>\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t\t<div class=\"ams-search\" ng-show=\"search_field !== null\">\n\t\t\t\t<input class=\"ams-search-field\" type=\"text\" name=\"ams-search-field\" value=\"\" placeholder=\"{{ 'SEARCH' | translate }}\" ng-model=\"search\" autofocus>\n\t\t\t\t<div class=\"ams-spinner\" ng-show=\"search_spinner_visible\"></div>\n\t\t\t\t<button class=\"clear ams-btn\" type=\"button\" accesskey=\"c\" name=\"clear\" title=\"{{ 'CLEAR' | translate }}\" ng-click=\"search = ''\"></button>\n\t\t\t</div>\n\n\t\t\t<div class=\"ams-items\">\n\t\t\t\t<div\n\t\t\t\t\tng-repeat=\"item in items track by item[ops.ID_PROPERTY]\"\n\t\t\t\t\tclass=\"ams-item {{ amssh.get_level_class(item) }} {{ amssh.get_type_class(item) }} {{ amssh.get_open_class(item) }} {{ $index === focused_index ? 'ams-item-focused' : '' }}\"\n\t\t\t\t>\n\t\t\t\t\t<!-- Caret -->\n\t\t\t\t\t<div\n\t\t\t\t\t\tclass=\"ams-caret {{ amssh.get_open_class(item) }}\"\n\t\t\t\t\t\tng-click=\"toggle_open_node(item)\"\n\t\t\t\t\t></div>\n\n\t\t\t\t\t<!-- Text of the element -->\n\t\t\t\t\t<div class=\"ams-item-text\" ng-bind-html=\"amssh.create_label(item, search)\"></div>\n\n\t\t\t\t\t<!-- Check holder -->\n\t\t\t\t\t<div\n\t\t\t\t\t\tclass=\"check {{ amssh.get_checked_class(item) }}\"\n\t\t\t\t\t\tng-click=\"toggle_check_node(item)\"\n\t\t\t\t\t>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t</div>\n\n\t"], ["\n\n\t\t<div class=\"ams-button\" ng-click=\"open = !open\">\n\t\t\t<div class=\"ams-button-text\" ng-bind-html=\"amssh.create_dropdown_label(stats, outputModelNotFormatted, self.output_type)\"></div>\n\t\t\t<div class=\"ams-caret\"></div>\n\t\t</div>\n\n\t\t<div class=\"ams-container ng-cloak\" ng-show=\"open\">\n\n\t\t\t<div class=\"ams-helpers\">\n\t\t\t\t<div class=\"selects\">\n\t\t\t\t\t<button class=\"all ams-btn\" type=\"button\" accesskey=\"a\" ng-click=\"check_all()\" ng-hide=\"hide_helpers.indexOf('check_all') > -1\">{{ 'CHECK_ALL' | translate }}</button>\n\t\t\t\t\t<button class=\"none ams-btn\" type=\"button\" accesskey=\"n\" ng-click=\"uncheck_all()\" ng-hide=\"hide_helpers.indexOf('check_none') > -1\">{{ 'CHECK_NONE' | translate }}</button>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"resets\">\n\t\t\t\t\t<button class=\"reset ams-btn\" type=\"button\" accesskey=\"r\" ng-click=\"reset()\" ng-hide=\"hide_helpers.indexOf('reset') > -1\">{{ 'RESET' | translate }}</button>\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t\t<div class=\"ams-search\" ng-show=\"search_field !== null\">\n\t\t\t\t<input class=\"ams-search-field\" type=\"text\" name=\"ams-search-field\" value=\"\" placeholder=\"{{ 'SEARCH' | translate }}\" ng-model=\"search\" autofocus>\n\t\t\t\t<div class=\"ams-spinner\" ng-show=\"search_spinner_visible\"></div>\n\t\t\t\t<button class=\"clear ams-btn\" type=\"button\" accesskey=\"c\" name=\"clear\" title=\"{{ 'CLEAR' | translate }}\" ng-click=\"search = ''\"></button>\n\t\t\t</div>\n\n\t\t\t<div class=\"ams-items\">\n\t\t\t\t<div\n\t\t\t\t\tng-repeat=\"item in items track by item[ops.ID_PROPERTY]\"\n\t\t\t\t\tclass=\"ams-item {{ amssh.get_level_class(item) }} {{ amssh.get_type_class(item) }} {{ amssh.get_open_class(item) }} {{ $index === focused_index ? 'ams-item-focused' : '' }}\"\n\t\t\t\t>\n\t\t\t\t\t<!-- Caret -->\n\t\t\t\t\t<div\n\t\t\t\t\t\tclass=\"ams-caret {{ amssh.get_open_class(item) }}\"\n\t\t\t\t\t\tng-click=\"toggle_open_node(item)\"\n\t\t\t\t\t></div>\n\n\t\t\t\t\t<!-- Text of the element -->\n\t\t\t\t\t<div class=\"ams-item-text\" ng-bind-html=\"amssh.create_label(item, search)\"></div>\n\n\t\t\t\t\t<!-- Check holder -->\n\t\t\t\t\t<div\n\t\t\t\t\t\tclass=\"check {{ amssh.get_checked_class(item) }}\"\n\t\t\t\t\t\tng-click=\"toggle_check_node(item)\"\n\t\t\t\t\t>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t</div>\n\n\t"]);
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
@@ -1108,18 +1108,56 @@ angular_multi_select_engine.factory('angularMultiSelectEngine', ['angularMultiSe
 			'$and': filter
 		}).simplesort(angularMultiSelectConstants.INTERNAL_KEY_ORDER, false).data();
 
+		//add parents node if needed, this will show a whole path
+		if (tree) {
+			var parents = [];
+			var parentsWhichExists = {};
+			tree.forEach(function (t) {
+				parentsWhichExists[t.id] = true;
+				var amsParentsIds = t[angularMultiSelectConstants.INTERNAL_KEY_PARENTS_ID];
+				if (amsParentsIds) {
+					amsParentsIds.forEach(function (pid) {
+						if (parentsWhichExists[pid] === undefined) {
+							parents.push(pid);
+						}
+					});
+				}
+			});
+			filter = [];
+			parents.forEach(function (pid) {
+				filter.push({
+					'id': {
+						'$eq': pid
+					}
+				});
+			});
+			var parentsTree = this.collection.chain().find({
+				'$or': filter
+			}).simplesort(angularMultiSelectConstants.INTERNAL_KEY_ORDER, false).data();
+			parentsTree.forEach(function (p) {
+				//insert
+				var len = tree.length;
+				for (var i = 0; i < len; i++) {
+					var t = tree[i];
+					if (t[angularMultiSelectConstants.INTERNAL_KEY_PARENTS_ID].indexOf(p.id) !== -1) {
+						tree.splice(i, 0, p);
+						break;
+					}
+				}
+			});
+		}
 		if (this.DEBUG === true) console.timeEnd(this.NAME + " -> get_filtered_tree");
 
 		return tree;
 	};
 
 	/*
-  ██████  ███████ ████████      ██████ ██   ██ ███████  ██████ ██   ██ ███████ ██████      ████████ ██████  ███████ ███████
- ██       ██         ██        ██      ██   ██ ██      ██      ██  ██  ██      ██   ██        ██    ██   ██ ██      ██
- ██   ███ █████      ██        ██      ███████ █████   ██      █████   █████   ██   ██        ██    ██████  █████   █████
- ██    ██ ██         ██        ██      ██   ██ ██      ██      ██  ██  ██      ██   ██        ██    ██   ██ ██      ██
-  ██████  ███████    ██         ██████ ██   ██ ███████  ██████ ██   ██ ███████ ██████         ██    ██   ██ ███████ ███████
- */
+    ██████  ███████ ████████      ██████ ██   ██ ███████  ██████ ██   ██ ███████ ██████      ████████ ██████  ███████ ███████
+    ██       ██         ██        ██      ██   ██ ██      ██      ██  ██  ██      ██   ██        ██    ██   ██ ██      ██
+    ██   ███ █████      ██        ██      ███████ █████   ██      █████   █████   ██   ██        ██    ██████  █████   █████
+    ██    ██ ██         ██        ██      ██   ██ ██      ██      ██  ██  ██      ██   ██        ██    ██   ██ ██      ██
+    ██████  ███████    ██         ██████ ██   ██ ███████  ██████ ██   ██ ███████ ██████         ██    ██   ██ ███████ ███████
+    */
 	Engine.prototype.get_checked_tree = function (filter) {
 		/*
    * Get only the checked elements from Loki.
@@ -1172,12 +1210,12 @@ angular_multi_select_engine.factory('angularMultiSelectEngine', ['angularMultiSe
 	};
 
 	/*
-  ██████  ███████ ████████     ██ ████████ ███████ ███    ███
- ██       ██         ██        ██    ██    ██      ████  ████
- ██   ███ █████      ██        ██    ██    █████   ██ ████ ██
- ██    ██ ██         ██        ██    ██    ██      ██  ██  ██
-  ██████  ███████    ██        ██    ██    ███████ ██      ██
- */
+    ██████  ███████ ████████     ██ ████████ ███████ ███    ███
+    ██       ██         ██        ██    ██    ██      ████  ████
+    ██   ███ █████      ██        ██    ██    █████   ██ ████ ██
+    ██    ██ ██         ██        ██    ██    ██      ██  ██  ██
+    ██████  ███████    ██        ██    ██    ███████ ██      ██
+    */
 	Engine.prototype.get_item = function (item) {
 		if ((typeof item === "undefined" ? "undefined" : _typeof(item)) !== 'object' || Object.keys(item).length === 0) return {};
 
@@ -1198,12 +1236,12 @@ angular_multi_select_engine.factory('angularMultiSelectEngine', ['angularMultiSe
 	};
 
 	/*
- ████████  ██████   ██████   ██████  ██      ███████      ██████  ██████  ███████ ███    ██
+    ████████  ██████   ██████   ██████  ██      ███████      ██████  ██████  ███████ ███    ██
     ██    ██    ██ ██       ██       ██      ██          ██    ██ ██   ██ ██      ████   ██
     ██    ██    ██ ██   ███ ██   ███ ██      █████       ██    ██ ██████  █████   ██ ██  ██
     ██    ██    ██ ██    ██ ██    ██ ██      ██          ██    ██ ██      ██      ██  ██ ██
     ██     ██████   ██████   ██████  ███████ ███████      ██████  ██      ███████ ██   ████
- */
+    */
 	Engine.prototype.toggle_open_node = function (item) {
 		/*
    * Toggle the open/closed state of an element.
@@ -1221,12 +1259,12 @@ angular_multi_select_engine.factory('angularMultiSelectEngine', ['angularMultiSe
 	};
 
 	/*
-  ██████  ██████  ███████ ███    ██     ███    ██  ██████  ██████  ███████
- ██    ██ ██   ██ ██      ████   ██     ████   ██ ██    ██ ██   ██ ██
- ██    ██ ██████  █████   ██ ██  ██     ██ ██  ██ ██    ██ ██   ██ █████
- ██    ██ ██      ██      ██  ██ ██     ██  ██ ██ ██    ██ ██   ██ ██
-  ██████  ██      ███████ ██   ████     ██   ████  ██████  ██████  ███████
- */
+    ██████  ██████  ███████ ███    ██     ███    ██  ██████  ██████  ███████
+    ██    ██ ██   ██ ██      ████   ██     ████   ██ ██    ██ ██   ██ ██
+    ██    ██ ██████  █████   ██ ██  ██     ██ ██  ██ ██    ██ ██   ██ █████
+    ██    ██ ██      ██      ██  ██ ██     ██  ██ ██ ██    ██ ██   ██ ██
+    ██████  ██      ███████ ██   ████     ██   ████  ██████  ██████  ███████
+    */
 	Engine.prototype.open_node = function (item) {
 		var _this = this;
 
@@ -1271,12 +1309,12 @@ angular_multi_select_engine.factory('angularMultiSelectEngine', ['angularMultiSe
 	};
 
 	/*
-  ██████ ██       ██████  ███████ ███████     ███    ██  ██████  ██████  ███████
- ██      ██      ██    ██ ██      ██          ████   ██ ██    ██ ██   ██ ██
- ██      ██      ██    ██ ███████ █████       ██ ██  ██ ██    ██ ██   ██ █████
- ██      ██      ██    ██      ██ ██          ██  ██ ██ ██    ██ ██   ██ ██
-  ██████ ███████  ██████  ███████ ███████     ██   ████  ██████  ██████  ███████
- */
+    ██████ ██       ██████  ███████ ███████     ███    ██  ██████  ██████  ███████
+    ██      ██      ██    ██ ██      ██          ████   ██ ██    ██ ██   ██ ██
+    ██      ██      ██    ██ ███████ █████       ██ ██  ██ ██    ██ ██   ██ █████
+    ██      ██      ██    ██      ██ ██          ██  ██ ██ ██    ██ ██   ██ ██
+    ██████ ███████  ██████  ███████ ███████     ██   ████  ██████  ██████  ███████
+    */
 	Engine.prototype.close_node = function (item) {
 		var _this2 = this;
 
@@ -1305,12 +1343,50 @@ angular_multi_select_engine.factory('angularMultiSelectEngine', ['angularMultiSe
 	};
 
 	/*
-  ██████ ██   ██ ███████  ██████ ██   ██      █████  ██      ██
- ██      ██   ██ ██      ██      ██  ██      ██   ██ ██      ██
- ██      ███████ █████   ██      █████       ███████ ██      ██
- ██      ██   ██ ██      ██      ██  ██      ██   ██ ██      ██
-  ██████ ██   ██ ███████  ██████ ██   ██     ██   ██ ███████ ███████
- */
+    ██████ ██   ██ ███████  ██████ ██   ██      █████  ██      ██
+    ██      ██   ██ ██      ██      ██  ██      ██   ██ ██      ██
+    ██      ███████ █████   ██      █████       ███████ ██      ██
+    ██      ██   ██ ██      ██      ██  ██      ██   ██ ██      ██
+    ██████ ██   ██ ███████  ██████ ██   ██     ██   ██ ███████ ███████
+    */
+	//whether or not the 'item' need to be processed
+	//if any of a parent of an item is already processed, the item iteself won't need to be processed
+	function needToProcess(item, processed) {
+		var needProcess = true;
+		for (var i = processed.length - 1; i >= 0; i--) {
+			if (item[angularMultiSelectConstants.INTERNAL_KEY_PARENTS_ID].indexOf(processed[i]) !== -1) {
+				needProcess = false;
+				break;
+			}
+		}
+		return needProcess;
+	}
+	Engine.prototype.check_filtered = function (filter) {
+		var self = this;
+		var ret = this.collection.chain().find(filter).simplesort(angularMultiSelectConstants.INTERNAL_KEY_ORDER, false).data();
+		if (ret) {
+			var processed = [];
+			ret.forEach(function (r) {
+				if (needToProcess(r, processed)) {
+					self.check_node(r);
+					processed.push(r.id);
+				}
+			});
+		}
+	};
+	Engine.prototype.uncheck_filtered = function (filter) {
+		var self = this;
+		var ret = this.collection.chain().find(filter).simplesort(angularMultiSelectConstants.INTERNAL_KEY_ORDER, false).data();
+		if (ret) {
+			var processed = [];
+			ret.forEach(function (r) {
+				if (needToProcess(r, processed)) {
+					self.uncheck_node(r);
+					processed.push(r.id);
+				}
+			});
+		}
+	};
 	Engine.prototype.check_all = function () {
 		var _this3 = this;
 
@@ -1335,12 +1411,12 @@ angular_multi_select_engine.factory('angularMultiSelectEngine', ['angularMultiSe
 	};
 
 	/*
- ██    ██ ███    ██  ██████ ██   ██ ███████  ██████ ██   ██      █████  ██      ██
- ██    ██ ████   ██ ██      ██   ██ ██      ██      ██  ██      ██   ██ ██      ██
- ██    ██ ██ ██  ██ ██      ███████ █████   ██      █████       ███████ ██      ██
- ██    ██ ██  ██ ██ ██      ██   ██ ██      ██      ██  ██      ██   ██ ██      ██
-  ██████  ██   ████  ██████ ██   ██ ███████  ██████ ██   ██     ██   ██ ███████ ███████
- */
+    ██    ██ ███    ██  ██████ ██   ██ ███████  ██████ ██   ██      █████  ██      ██
+    ██    ██ ████   ██ ██      ██   ██ ██      ██      ██  ██      ██   ██ ██      ██
+    ██    ██ ██ ██  ██ ██      ███████ █████   ██      █████       ███████ ██      ██
+    ██    ██ ██  ██ ██ ██      ██   ██ ██      ██      ██  ██      ██   ██ ██      ██
+    ██████  ██   ████  ██████ ██   ██ ███████  ██████ ██   ██     ██   ██ ███████ ███████
+    */
 	Engine.prototype.uncheck_all = function () {
 		var _this4 = this;
 
@@ -1365,12 +1441,12 @@ angular_multi_select_engine.factory('angularMultiSelectEngine', ['angularMultiSe
 	};
 
 	/*
- ████████  ██████   ██████   ██████  ██      ███████      ██████ ██   ██ ███████  ██████ ██   ██
+    ████████  ██████   ██████   ██████  ██      ███████      ██████ ██   ██ ███████  ██████ ██   ██
     ██    ██    ██ ██       ██       ██      ██          ██      ██   ██ ██      ██      ██  ██
     ██    ██    ██ ██   ███ ██   ███ ██      █████       ██      ███████ █████   ██      █████
     ██    ██    ██ ██    ██ ██    ██ ██      ██          ██      ██   ██ ██      ██      ██  ██
     ██     ██████   ██████   ██████  ███████ ███████      ██████ ██   ██ ███████  ██████ ██   ██
- */
+    */
 	Engine.prototype.toggle_check_node = function (item, ops) {
 		/*
    * Toggle the checked state on an item.
@@ -1398,12 +1474,12 @@ angular_multi_select_engine.factory('angularMultiSelectEngine', ['angularMultiSe
 	};
 
 	/*
-  ██████ ██   ██ ███████  ██████ ██   ██     ███    ██  ██████  ██████  ███████     ██████  ██    ██
- ██      ██   ██ ██      ██      ██  ██      ████   ██ ██    ██ ██   ██ ██          ██   ██  ██  ██
- ██      ███████ █████   ██      █████       ██ ██  ██ ██    ██ ██   ██ █████       ██████    ████
- ██      ██   ██ ██      ██      ██  ██      ██  ██ ██ ██    ██ ██   ██ ██          ██   ██    ██
-  ██████ ██   ██ ███████  ██████ ██   ██     ██   ████  ██████  ██████  ███████     ██████     ██
- */
+    ██████ ██   ██ ███████  ██████ ██   ██     ███    ██  ██████  ██████  ███████     ██████  ██    ██
+    ██      ██   ██ ██      ██      ██  ██      ████   ██ ██    ██ ██   ██ ██          ██   ██  ██  ██
+    ██      ███████ █████   ██      █████       ██ ██  ██ ██    ██ ██   ██ █████       ██████    ████
+    ██      ██   ██ ██      ██      ██  ██      ██  ██ ██ ██    ██ ██   ██ ██          ██   ██    ██
+    ██████ ██   ██ ███████  ██████ ██   ██     ██   ████  ██████  ██████  ███████     ██████     ██
+    */
 	Engine.prototype.check_node_by = function (where) {
 		if (this.DEBUG === true) console.time(this.NAME + " -> check_node_by");
 
@@ -1426,12 +1502,12 @@ angular_multi_select_engine.factory('angularMultiSelectEngine', ['angularMultiSe
 	};
 
 	/*
-  ██████ ██   ██ ███████  ██████ ██   ██     ███    ██  ██████  ██████  ███████
- ██      ██   ██ ██      ██      ██  ██      ████   ██ ██    ██ ██   ██ ██
- ██      ███████ █████   ██      █████       ██ ██  ██ ██    ██ ██   ██ █████
- ██      ██   ██ ██      ██      ██  ██      ██  ██ ██ ██    ██ ██   ██ ██
-  ██████ ██   ██ ███████  ██████ ██   ██     ██   ████  ██████  ██████  ███████
- */
+    ██████ ██   ██ ███████  ██████ ██   ██     ███    ██  ██████  ██████  ███████
+    ██      ██   ██ ██      ██      ██  ██      ████   ██ ██    ██ ██   ██ ██
+    ██      ███████ █████   ██      █████       ██ ██  ██ ██    ██ ██   ██ █████
+    ██      ██   ██ ██      ██      ██  ██      ██  ██ ██ ██    ██ ██   ██ ██
+    ██████ ██   ██ ███████  ██████ ██   ██     ██   ████  ██████  ██████  ███████
+    */
 	Engine.prototype.check_node = function (item, ops) {
 		var _this5 = this;
 
@@ -1463,7 +1539,8 @@ angular_multi_select_engine.factory('angularMultiSelectEngine', ['angularMultiSe
    */
 		this.collection.chain().find(_defineProperty({}, this.ID_PROPERTY, item[this.ID_PROPERTY])).update(function (obj) {
 			if (item[angularMultiSelectConstants.INTERNAL_KEY_CHILDREN_LEAFS] === 0) {
-				_this5.stats[angularMultiSelectConstants.INTERNAL_STATS_CHECKED_LEAFS]++;
+				//if it is not checked yet, increase the count of checked leafs 
+				if (obj[_this5.CHECKED_PROPERTY] !== angularMultiSelectConstants.INTERNAL_DATA_LEAF_CHECKED) _this5.stats[angularMultiSelectConstants.INTERNAL_STATS_CHECKED_LEAFS]++;
 
 				obj[_this5.CHECKED_PROPERTY] = angularMultiSelectConstants.INTERNAL_DATA_LEAF_CHECKED;
 			} else {
@@ -1497,7 +1574,7 @@ angular_multi_select_engine.factory('angularMultiSelectEngine', ['angularMultiSe
 					_this5.stats[angularMultiSelectConstants.INTERNAL_STATS_CHECKED_NODES]++;
 				}
 
-				obj[angularMultiSelectConstants.INTERNAL_KEY_CHECKED_CHILDREN]++; // We can't overflow this as we're checking an unchecked item
+				if (obj[angularMultiSelectConstants.INTERNAL_KEY_CHECKED_CHILDREN] < obj[angularMultiSelectConstants.INTERNAL_KEY_CHILDREN_LEAFS]) obj[angularMultiSelectConstants.INTERNAL_KEY_CHECKED_CHILDREN]++; // We can't overflow this as we're checking an unchecked item
 				if (obj[angularMultiSelectConstants.INTERNAL_KEY_CHECKED_CHILDREN] === obj[angularMultiSelectConstants.INTERNAL_KEY_CHILDREN_LEAFS]) {
 					obj[_this5.CHECKED_PROPERTY] = angularMultiSelectConstants.INTERNAL_DATA_NODE_CHECKED;
 				} else {
@@ -1571,12 +1648,12 @@ angular_multi_select_engine.factory('angularMultiSelectEngine', ['angularMultiSe
 	};
 
 	/*
- ██    ██ ███    ██  ██████ ██   ██ ███████  ██████ ██   ██     ███    ██  ██████  ██████  ███████
- ██    ██ ████   ██ ██      ██   ██ ██      ██      ██  ██      ████   ██ ██    ██ ██   ██ ██
- ██    ██ ██ ██  ██ ██      ███████ █████   ██      █████       ██ ██  ██ ██    ██ ██   ██ █████
- ██    ██ ██  ██ ██ ██      ██   ██ ██      ██      ██  ██      ██  ██ ██ ██    ██ ██   ██ ██
-  ██████  ██   ████  ██████ ██   ██ ███████  ██████ ██   ██     ██   ████  ██████  ██████  ███████
- */
+    ██    ██ ███    ██  ██████ ██   ██ ███████  ██████ ██   ██     ███    ██  ██████  ██████  ███████
+    ██    ██ ████   ██ ██      ██   ██ ██      ██      ██  ██      ████   ██ ██    ██ ██   ██ ██
+    ██    ██ ██ ██  ██ ██      ███████ █████   ██      █████       ██ ██  ██ ██    ██ ██   ██ █████
+    ██    ██ ██  ██ ██ ██      ██   ██ ██      ██      ██  ██      ██  ██ ██ ██    ██ ██   ██ ██
+    ██████  ██   ████  ██████ ██   ██ ███████  ██████ ██   ██     ██   ████  ██████  ██████  ███████
+    */
 	Engine.prototype.uncheck_node = function (item, ops) {
 		var _this6 = this;
 
@@ -1606,7 +1683,7 @@ angular_multi_select_engine.factory('angularMultiSelectEngine', ['angularMultiSe
    */
 		this.collection.chain().find(_defineProperty({}, this.ID_PROPERTY, item[this.ID_PROPERTY])).update(function (obj) {
 			if (item[angularMultiSelectConstants.INTERNAL_KEY_CHILDREN_LEAFS] === 0) {
-				_this6.stats[angularMultiSelectConstants.INTERNAL_STATS_CHECKED_LEAFS]--;
+				if (obj[_this6.CHECKED_PROPERTY] === angularMultiSelectConstants.INTERNAL_DATA_LEAF_CHECKED) _this6.stats[angularMultiSelectConstants.INTERNAL_STATS_CHECKED_LEAFS]--;
 
 				obj[_this6.CHECKED_PROPERTY] = angularMultiSelectConstants.INTERNAL_DATA_LEAF_UNCHECKED;
 			} else {
@@ -1637,7 +1714,7 @@ angular_multi_select_engine.factory('angularMultiSelectEngine', ['angularMultiSe
 					_this6.stats[angularMultiSelectConstants.INTERNAL_STATS_UNCHECKED_NODES]++;
 				}
 
-				obj[angularMultiSelectConstants.INTERNAL_KEY_CHECKED_CHILDREN]--; // We can't underflow this as we're unchecking a checked item
+				if (obj[angularMultiSelectConstants.INTERNAL_KEY_CHECKED_CHILDREN] > 0) obj[angularMultiSelectConstants.INTERNAL_KEY_CHECKED_CHILDREN]--; // We can't underflow this as we're unchecking a checked item
 				if (obj[angularMultiSelectConstants.INTERNAL_KEY_CHECKED_CHILDREN] === 0) {
 					obj[_this6.CHECKED_PROPERTY] = angularMultiSelectConstants.INTERNAL_DATA_NODE_UNCHECKED;
 				} else {
@@ -1711,12 +1788,12 @@ angular_multi_select_engine.factory('angularMultiSelectEngine', ['angularMultiSe
 	};
 
 	/*
- ██    ██ ███    ██  ██████ ██   ██ ███████  ██████ ██   ██     ███████ ██ ██████  ███████ ████████
- ██    ██ ████   ██ ██      ██   ██ ██      ██      ██  ██      ██      ██ ██   ██ ██         ██
- ██    ██ ██ ██  ██ ██      ███████ █████   ██      █████       █████   ██ ██████  ███████    ██
- ██    ██ ██  ██ ██ ██      ██   ██ ██      ██      ██  ██      ██      ██ ██   ██      ██    ██
-  ██████  ██   ████  ██████ ██   ██ ███████  ██████ ██   ██     ██      ██ ██   ██ ███████    ██
- */
+    ██    ██ ███    ██  ██████ ██   ██ ███████  ██████ ██   ██     ███████ ██ ██████  ███████ ████████
+    ██    ██ ████   ██ ██      ██   ██ ██      ██      ██  ██      ██      ██ ██   ██ ██         ██
+    ██    ██ ██ ██  ██ ██      ███████ █████   ██      █████       █████   ██ ██████  ███████    ██
+    ██    ██ ██  ██ ██ ██      ██   ██ ██      ██      ██  ██      ██      ██ ██   ██      ██    ██
+    ██████  ██   ████  ██████ ██   ██ ███████  ██████ ██   ██     ██      ██ ██   ██ ███████    ██
+    */
 	Engine.prototype.uncheck_first = function (n) {
 		/*
    * Find the oldest n leaf that have been marked as checked and uncheck them.
@@ -1813,7 +1890,7 @@ angular_multi_select_styles_helper.run([function () {
 	angular.element(document.getElementsByTagName('head')).append(inject);
 }]);
 
-angular_multi_select_styles_helper.factory('angularMultiSelectStylesHelper', ['$sce', '$interpolate', 'angularMultiSelectUtils', 'angularMultiSelectConstants', function ($sce, $interpolate, angularMultiSelectUtils, angularMultiSelectConstants) {
+angular_multi_select_styles_helper.factory('angularMultiSelectStylesHelper', ['$sce', '$interpolate', 'angularMultiSelectUtils', 'angularMultiSelectConstants', '$filter', function ($sce, $interpolate, angularMultiSelectUtils, angularMultiSelectConstants, $filter) {
 	'use strict';
 	/*
   ██████  ██████  ███    ██ ███████ ████████ ██████  ██    ██  ██████ ████████  ██████  ██████
@@ -2025,7 +2102,7 @@ angular_multi_select_styles_helper.factory('angularMultiSelectStylesHelper', ['$
  ██      ██   ██ ██      ██   ██    ██    ██          ██      ██   ██ ██   ██ ██      ██
   ██████ ██   ██ ███████ ██   ██    ██    ███████     ███████ ██   ██ ██████  ███████ ███████
  */
-	StylesHelper.prototype.create_label = function (item) {
+	StylesHelper.prototype.create_label = function (item, search) {
 		//TODO: Cache + cache invalidation on data change
 
 		var _interpolated;
@@ -2035,6 +2112,9 @@ angular_multi_select_styles_helper.factory('angularMultiSelectStylesHelper', ['$
 			_interpolated = this.node_repr(item);
 		}
 
+		if (search) {
+			_interpolated = $filter('highlight')(_interpolated, search);
+		}
 		return $sce.trustAsHtml(_interpolated);
 	};
 
@@ -2540,14 +2620,35 @@ angular_multi_select.directive('angularMultiSelect', ['$http', '$compile', '$tim
 			$scope.reset = function () {
 				self.init($scope.reset_model);
 			};
-
+			$scope.check_all = function () {
+				var query = $scope.search;
+				if (query === '') amse.check_all();else {
+					var filter = {
+						'name': {
+							'$contains': query
+						}
+					};
+					amse.check_filtered(filter);
+				}
+			};
+			$scope.uncheck_all = function () {
+				var query = $scope.search;
+				if (query === '') amse.uncheck_all();else {
+					var filter = {
+						'name': {
+							'$contains': query
+						}
+					};
+					amse.uncheck_filtered(filter);
+				}
+			};
 			/*
-   ███████ ███████  █████  ██████   ██████ ██   ██
-   ██      ██      ██   ██ ██   ██ ██      ██   ██
-   ███████ █████   ███████ ██████  ██      ███████
-        ██ ██      ██   ██ ██   ██ ██      ██   ██
-   ███████ ███████ ██   ██ ██   ██  ██████ ██   ██
-   */
+      ███████ ███████  █████  ██████   ██████ ██   ██
+      ██      ██      ██   ██ ██   ██ ██      ██   ██
+      ███████ █████   ███████ ██████  ██      ███████
+      ██ ██      ██   ██ ██   ██ ██      ██   ██
+      ███████ ███████ ██   ██ ██   ██  ██████ ██   ██
+      */
 			$scope.search = "";
 			self.search_promise = null;
 			$scope.search_spinner_visible = false;
@@ -2607,12 +2708,12 @@ angular_multi_select.directive('angularMultiSelect', ['$http', '$compile', '$tim
 			});
 
 			/*
-    ██████  ███    ██     ██████   █████  ████████  █████       ██████ ██   ██  █████  ███    ██  ██████  ███████
-   ██    ██ ████   ██     ██   ██ ██   ██    ██    ██   ██     ██      ██   ██ ██   ██ ████   ██ ██       ██
-   ██    ██ ██ ██  ██     ██   ██ ███████    ██    ███████     ██      ███████ ███████ ██ ██  ██ ██   ███ █████
-   ██    ██ ██  ██ ██     ██   ██ ██   ██    ██    ██   ██     ██      ██   ██ ██   ██ ██  ██ ██ ██    ██ ██
-    ██████  ██   ████     ██████  ██   ██    ██    ██   ██      ██████ ██   ██ ██   ██ ██   ████  ██████  ███████
-   */
+      ██████  ███    ██     ██████   █████  ████████  █████       ██████ ██   ██  █████  ███    ██  ██████  ███████
+      ██    ██ ████   ██     ██   ██ ██   ██    ██    ██   ██     ██      ██   ██ ██   ██ ████   ██ ██       ██
+      ██    ██ ██ ██  ██     ██   ██ ███████    ██    ███████     ██      ███████ ███████ ██ ██  ██ ██   ███ █████
+      ██    ██ ██  ██ ██     ██   ██ ██   ██    ██    ██   ██     ██      ██   ██ ██   ██ ██  ██ ██ ██    ██ ██
+      ██████  ██   ████     ██████  ██   ██    ██    ██   ██      ██████ ██   ██ ██   ██ ██   ████  ██████  ███████
+      */
 			amse.on_data_change_fn = function () {
 				if (self.react_to_data_changes === false) {
 					return;
@@ -2667,12 +2768,12 @@ angular_multi_select.directive('angularMultiSelect', ['$http', '$compile', '$tim
 			};
 
 			/*
-    ██████  ███    ██     ██    ██ ██ ███████ ██    ██  █████  ██           ██████ ██   ██  █████  ███    ██  ██████  ███████
-   ██    ██ ████   ██     ██    ██ ██ ██      ██    ██ ██   ██ ██          ██      ██   ██ ██   ██ ████   ██ ██       ██
-   ██    ██ ██ ██  ██     ██    ██ ██ ███████ ██    ██ ███████ ██          ██      ███████ ███████ ██ ██  ██ ██   ███ █████
-   ██    ██ ██  ██ ██      ██  ██  ██      ██ ██    ██ ██   ██ ██          ██      ██   ██ ██   ██ ██  ██ ██ ██    ██ ██
-    ██████  ██   ████       ████   ██ ███████  ██████  ██   ██ ███████      ██████ ██   ██ ██   ██ ██   ████  ██████  ███████
-   */
+      ██████  ███    ██     ██    ██ ██ ███████ ██    ██  █████  ██           ██████ ██   ██  █████  ███    ██  ██████  ███████
+      ██    ██ ████   ██     ██    ██ ██ ██      ██    ██ ██   ██ ██          ██      ██   ██ ██   ██ ████   ██ ██       ██
+      ██    ██ ██ ██  ██     ██    ██ ██ ███████ ██    ██ ███████ ██          ██      ███████ ███████ ██ ██  ██ ██   ███ █████
+      ██    ██ ██  ██ ██      ██  ██  ██      ██ ██    ██ ██   ██ ██          ██      ██   ██ ██   ██ ██  ██ ██ ██    ██ ██
+      ██████  ██   ████       ████   ██ ███████  ██████  ██   ██ ███████      ██████ ██   ██ ██   ██ ██   ████  ██████  ███████
+      */
 			amse.on_visual_change_fn = function () {
 				/*
      * Will be triggered when a change that requires a visual change happende.
@@ -2690,12 +2791,12 @@ angular_multi_select.directive('angularMultiSelect', ['$http', '$compile', '$tim
 			};
 
 			/*
-   ███    ███  █████  ██ ███    ██
-   ████  ████ ██   ██ ██ ████   ██
-   ██ ████ ██ ███████ ██ ██ ██  ██
-   ██  ██  ██ ██   ██ ██ ██  ██ ██
-   ██      ██ ██   ██ ██ ██   ████
-   */
+      ███    ███  █████  ██ ███    ██
+      ████  ████ ██   ██ ██ ████   ██
+      ██ ████ ██ ███████ ██ ██ ██  ██
+      ██  ██  ██ ██   ██ ██ ██  ██ ██
+      ██      ██ ██   ██ ██ ██   ████
+      */
 			self.prepare_data = function (data) {
 				if (!Array.isArray(data)) {
 					return [];
@@ -2731,9 +2832,9 @@ angular_multi_select.directive('angularMultiSelect', ['$http', '$compile', '$tim
 			$scope.$watch('inputModel', function (_new, _old) {
 				self.react_to_data_changes = false;
 				/*
-    * The entry point of the directive. This monitors the input data and
-    * decides when to populate the internal data model and how to do it.
-    */
+     * The entry point of the directive. This monitors the input data and
+     * decides when to populate the internal data model and how to do it.
+     */
 				var data;
 				if (typeof _new === "string") {
 					try {
@@ -2812,6 +2913,14 @@ angular_multi_select.filter('outputModelIterator', ['angularMultiSelectConstants
 		}
 
 		return output.join(glue) || default_str || "";
+	};
+}]);
+angular_multi_select.filter('highlight', [function () {
+	return function (text, search) {
+		if (search) {
+			text = text.replace(new RegExp('(' + search + ')', 'gi'), '<mark>$1</mark>');
+		}
+		return text;
 	};
 }]);
 
