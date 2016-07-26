@@ -346,9 +346,11 @@ angular_multi_select_engine.factory('angularMultiSelectEngine', [
                                     });
                                     filter = [];
                                     parents.forEach(function(pid) {
-                                        filter.push(_defineProperty({}, 'id', {
-                                            '$eq': pid 
-                                        }));
+                                        filter.push({
+                                            'id': {
+                                                '$eq': pid
+                                            }
+                                        });
                                     });
                                     var parentsTree = this.collection.chain().find({
                                         '$or': filter
@@ -628,21 +630,43 @@ angular_multi_select_engine.factory('angularMultiSelectEngine', [
                    ██      ██   ██ ██      ██      ██  ██      ██   ██ ██      ██
                    ██████ ██   ██ ███████  ██████ ██   ██     ██   ██ ███████ ███████
                    */
+                //whether or not the 'item' need to be processed
+                //if any of a parent of an item is already processed, the item iteself won't need to be processed
+                function needToProcess(item, processed) {
+                    var needProcess = true;
+                    for(var i = processed.length - 1; i >=0; i--) {
+                        if(item[angularMultiSelectConstants.INTERNAL_KEY_PARENTS_ID].indexOf(processed[i]) !== -1) {
+                            needProcess = false;
+                            break;
+                        }
+                    }
+                    return needProcess;
+                }
                 Engine.prototype.check_filtered = function(filter) {
                     var self = this;
                     var ret= this.collection.chain().find(filter).simplesort(angularMultiSelectConstants.INTERNAL_KEY_ORDER, false).data();
-                    if(ret)
+                    if(ret) {
+                        var processed = [];
                         ret.forEach(function(r) {
-                            self.check_node(r);
+                            if(needToProcess(r, processed)) {
+                                self.check_node(r);
+                                processed.push(r.id);
+                            }
                         });
+                    }
                 };
                 Engine.prototype.uncheck_filtered = function(filter) {
                     var self = this;
                     var ret= this.collection.chain().find(filter).simplesort(angularMultiSelectConstants.INTERNAL_KEY_ORDER, false).data();
-                    if(ret)
+                    if(ret) {
+                        var processed = [];
                         ret.forEach(function(r) {
-                            self.uncheck_node(r);
+                            if(needToProcess(r, processed)) {
+                                self.uncheck_node(r);
+                                processed.push(r.id);
+                            }
                         });
+                    }
                 };
                 Engine.prototype.check_all = function () {
                     if (this.DEBUG === true) console.time(this.NAME + " -> check_all");
@@ -850,7 +874,8 @@ angular_multi_select_engine.factory('angularMultiSelectEngine', [
                                     this.stats[angularMultiSelectConstants.INTERNAL_STATS_CHECKED_NODES]++;
                                 }
 
-                                obj[angularMultiSelectConstants.INTERNAL_KEY_CHECKED_CHILDREN]++; // We can't overflow this as we're checking an unchecked item
+                                if(obj[angularMultiSelectConstants.INTERNAL_KEY_CHECKED_CHILDREN] < obj[angularMultiSelectConstants.INTERNAL_KEY_CHILDREN_LEAFS])
+                                    obj[angularMultiSelectConstants.INTERNAL_KEY_CHECKED_CHILDREN]++; // We can't overflow this as we're checking an unchecked item
                                 if (obj[angularMultiSelectConstants.INTERNAL_KEY_CHECKED_CHILDREN] === obj[angularMultiSelectConstants.INTERNAL_KEY_CHILDREN_LEAFS]) {
                                     obj[this.CHECKED_PROPERTY] = angularMultiSelectConstants.INTERNAL_DATA_NODE_CHECKED;
                                 } else {
@@ -1024,7 +1049,8 @@ angular_multi_select_engine.factory('angularMultiSelectEngine', [
                                     this.stats[angularMultiSelectConstants.INTERNAL_STATS_UNCHECKED_NODES]++;
                                 }
 
-                                obj[angularMultiSelectConstants.INTERNAL_KEY_CHECKED_CHILDREN]--; // We can't underflow this as we're unchecking a checked item
+                                if(obj[angularMultiSelectConstants.INTERNAL_KEY_CHECKED_CHILDREN] > 0) 
+                                    obj[angularMultiSelectConstants.INTERNAL_KEY_CHECKED_CHILDREN]--; // We can't underflow this as we're unchecking a checked item
                                 if (obj[angularMultiSelectConstants.INTERNAL_KEY_CHECKED_CHILDREN] === 0) {
                                     obj[this.CHECKED_PROPERTY] = angularMultiSelectConstants.INTERNAL_DATA_NODE_UNCHECKED;
                                 } else {
