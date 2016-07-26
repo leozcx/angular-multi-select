@@ -41,7 +41,7 @@ angular_multi_select.run(['$templateCache', function($templateCache) {
 					></div>
 
 					<!-- Text of the element -->
-					<div class="ams-item-text" ng-bind-html="amssh.create_label(item)"></div>
+					<div class="ams-item-text" ng-bind-html="amssh.create_label(item, search)"></div>
 
 					<!-- Check holder -->
 					<div

@@ -58,7 +58,8 @@ angular_multi_select_styles_helper.factory('angularMultiSelectStylesHelper', [
 	'$interpolate',
 	'angularMultiSelectUtils',
 	'angularMultiSelectConstants',
-	function ($sce, $interpolate, angularMultiSelectUtils, angularMultiSelectConstants) {
+        '$filter',
+	function ($sce, $interpolate, angularMultiSelectUtils, angularMultiSelectConstants, $filter) {
 		'use strict';
 		/*
 		 ██████  ██████  ███    ██ ███████ ████████ ██████  ██    ██  ██████ ████████  ██████  ██████
@@ -287,7 +288,7 @@ angular_multi_select_styles_helper.factory('angularMultiSelectStylesHelper', [
 		██      ██   ██ ██      ██   ██    ██    ██          ██      ██   ██ ██   ██ ██      ██
 		 ██████ ██   ██ ███████ ██   ██    ██    ███████     ███████ ██   ██ ██████  ███████ ███████
 		*/
-		StylesHelper.prototype.create_label = function (item) {
+		StylesHelper.prototype.create_label = function (item, search) {
 			//TODO: Cache + cache invalidation on data change
 
 			var _interpolated;
@@ -297,6 +298,9 @@ angular_multi_select_styles_helper.factory('angularMultiSelectStylesHelper', [
 				_interpolated = this.node_repr(item);
 			}
 
+                        if(search) {
+                            _interpolated = $filter('highlight')(_interpolated, search);
+                        }
 			return $sce.trustAsHtml(_interpolated);
 		};
 

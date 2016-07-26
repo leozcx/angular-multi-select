@@ -42,3 +42,11 @@ angular_multi_select.filter('outputModelIterator', [
 		};
 	}
 ]);
+angular_multi_select.filter('highlight', [function() {
+    return function(text, search) {
+        if(search) {
+            text = text.replace(new RegExp('('+search+')', 'gi'), '<mark>$1</mark>')
+        }
+        return text;
+    };
+}]);
