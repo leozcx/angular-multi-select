@@ -25,7 +25,8 @@ angular_multi_select.directive('angularMultiSelect', [
 			scope: {
 				inputModel: '=',
 				outputModel: '=?',
-                                preselect2: '@'
+                                preselect2: '@', //we can't use preselect because in the previous processing it is supposed to be a string
+                                outputFilter: '@'
 			},
 
 			link: function ($scope, element, attrs) {
@@ -461,6 +462,11 @@ angular_multi_select.directive('angularMultiSelect', [
                                     });
                                 };
 
+                                $scope.$watch('outputFilter', function(_new, _old) {
+				    if (!_new) 
+                                        return;
+                                    self.output_filter = _new;
+                                });
                                 $scope.$watch('preselect2', function(_new, _old) {
                                     if(!_new)
                                         return;
