@@ -2396,7 +2396,8 @@ angular_multi_select.directive('angularMultiSelect', ['$http', '$compile', '$tim
 		scope: {
 			inputModel: '=',
 			outputModel: '=?',
-			preselect2: '@'
+			preselect2: '@', //we can't use preselect because in the previous processing it is supposed to be a string
+			outputFilter: '@'
 		},
 
 		link: function link($scope, element, attrs) {
@@ -2824,6 +2825,10 @@ angular_multi_select.directive('angularMultiSelect', ['$http', '$compile', '$tim
 				});
 			};
 
+			$scope.$watch('outputFilter', function (_new, _old) {
+				if (!_new) return;
+				self.output_filter = _new;
+			});
 			$scope.$watch('preselect2', function (_new, _old) {
 				if (!_new) return;
 				self.preselect = amsu.array_from_attr(_new);
