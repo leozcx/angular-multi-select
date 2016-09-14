@@ -25,7 +25,7 @@ angular_multi_select.directive('angularMultiSelect', [
 			scope: {
 				inputModel: '=',
 				outputModel: '=?',
-                                preselect2: '@', //we can't use preselect because in the previous processing it is supposed to be a string
+                                preselect: '@', 
                                 outputFilter: '@'
 			},
 
@@ -90,12 +90,6 @@ angular_multi_select.directive('angularMultiSelect', [
 				 * Find out which field to use for the 'search' functionality.
 				 */
 				$scope.search_field = attrs.searchField === undefined ? null : attrs.searchField;
-
-				/*
-				 * Find out if something should be preselected.
-				 */
-				self.preselect = amsu.array_from_attr(attrs.preselect);
-				amsu.parse_pairs(self.preselect);
 
 				/*
 				 * Find out if some of the helpers should be hidden.
@@ -451,6 +445,10 @@ angular_multi_select.directive('angularMultiSelect', [
 
                                     amse.insert(data);
 
+			            self.preselect = amsu.array_from_attr($scope.preselect);
+                                    if(data && data.length > 0 && angular.isNumber(data[0].id)) {
+			                amsu.parse_pairs(self.preselect);
+                                    }
                                     for (var i = 0; i < self.preselect.length; i += 2) {
                                         amse.check_node_by([self.preselect[i], self.preselect[i + 1]]);
                                     }
@@ -466,12 +464,6 @@ angular_multi_select.directive('angularMultiSelect', [
 				    if (!_new) 
                                         return;
                                     self.output_filter = _new;
-                                });
-                                $scope.$watch('preselect2', function(_new, _old) {
-                                    if(!_new)
-                                        return;
-                                    self.preselect = amsu.array_from_attr(_new);
-                                    amsu.parse_pairs(self.preselect);
                                 });
                                 $scope.$watch('inputModel', function (_new, _old) {
                                     self.react_to_data_changes = false;
