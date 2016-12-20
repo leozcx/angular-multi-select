@@ -26,7 +26,8 @@ angular_multi_select.directive('angularMultiSelect', [
 				inputModel: '=',
 				outputModel: '=?',
                                 preselect: '@', 
-                                outputFilter: '@'
+                                outputFilter: '@',
+                                onChange: '&'
 			},
 
 			link: function ($scope, element, attrs) {
@@ -396,6 +397,7 @@ angular_multi_select.directive('angularMultiSelect', [
                                         $rootScope.$broadcast('ams_output_model_change', {
                                             name: $scope.ops.NAME
                                         });
+                                        $scope.onChange();
                                     });
                                 };
 
@@ -446,7 +448,7 @@ angular_multi_select.directive('angularMultiSelect', [
                                     amse.insert(data);
 
 			            self.preselect = amsu.array_from_attr($scope.preselect);
-                                    if(data && data.length > 0 && angular.isNumber(data[0].id)) {
+				    if (data && data.length > 0 && angular.isNumber(data[0][$scope.amssh.ID_PROPERTY])) {
 			                amsu.parse_pairs(self.preselect);
                                     }
                                     for (var i = 0; i < self.preselect.length; i += 2) {
